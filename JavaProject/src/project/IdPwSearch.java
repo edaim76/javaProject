@@ -37,6 +37,7 @@ public class IdPwSearch {
 			} else return -1;
 			
 		} catch(JSONException e) { return -1; }
+		// 입력받은 데이터가 데이터베이스에 존재하지 않을 경우 예외 발생
 		finally {
 			br.close();
 		}

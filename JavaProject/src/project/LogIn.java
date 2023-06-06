@@ -29,7 +29,7 @@ public class LogIn {
 			
 			switch(searchResult) {
 //				case 0 : {
-//					NormalMenu normalMenu = new NormalMenu();
+//					NormalMenu normalMenu = new NormalMenu(id);
 //					normalMenu.normalMenu();
 //					break;
 //				}
@@ -45,7 +45,7 @@ public class LogIn {
 
 			}
 			} catch (IOException e) {
-				
+				e.printStackTrace();
 			}
 		}
 
