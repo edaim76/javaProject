@@ -2,7 +2,7 @@ package project;
 
 import java.io.FileReader;
 
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Employee {

@@ -57,22 +57,26 @@ public class exc {
 				case "2" :{
 					System.out.print("\n바꿀 생년월일을 입력하세요 > ");
 					String changeBirthDate = sc.nextLine();
-					setName(changeBirthDate);
+					setBirthDate(changeBirthDate);
 					break;
 				}
 				case "3" :{
 					System.out.print("\n바꿀 전화번호를 입력하세요 > ");
 					String changePhoneNumber = sc.nextLine();
-					setName(changePhoneNumber);
+					setPhoneNumber(changePhoneNumber);
 					break;
 				}
 				case "4" :{
 					System.out.print("\n바꿀 비밀번호를 입력하세요 > ");
 					String changePassword = sc.nextLine();
-					setName(changePassword);
+					setPassword(changePassword);
 					break;
 				}
-				case "9" : return employee;
+				case "9" : {
+					try {
+						bw.close(); return employee;
+					} catch(IOException e) {}
+					}
 			}
 		
 		}
@@ -104,7 +108,7 @@ public class exc {
 		try{bw.write(root.toString());}
 		catch(IOException e) { e.printStackTrace(); }
 		finally { try {
-					bw.flush(); bw.close();
+					bw.flush();
 				} catch(IOException e) { e.printStackTrace();}
 		}
 	}

@@ -28,11 +28,11 @@ public class LogIn {
 			int searchResult = idPwSearch.idPwSearch(id, password);
 			
 			switch(searchResult) {
-//				case 0 : {
-//					NormalMenu normalMenu = new NormalMenu(id);
-//					normalMenu.normalMenu();
-//					break;
-//				}
+				case 0 : {
+					NormalMenu normalMenu = new NormalMenu(id);
+					normalMenu.normalMenu();
+					break;
+				}
 //				case 1 : {
 //					AdminMenu adminMenu = new AdminMenu();
 //					adminMenu.adminMenu();

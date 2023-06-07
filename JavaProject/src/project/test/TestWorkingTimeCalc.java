@@ -25,10 +25,10 @@ public static void main(String[] args) throws Exception {
 //			System.out.println(data.toString());
 //			Employee employee = new Employee(scanId, data);
 			
-			WorkingTimeCalc workingTimeCalc = new WorkingTimeCalc(scanId);
-			workingTimeCalc.workingTimeCalc();
+			WorkingTimeCalc.workingTimeCalc(scanId);
+			
 		} catch(FileNotFoundException e) {
-			System.out.println(e.getMessage());
+			System.out.println("잘못된 사번입니다.");
 		}
 	}
 	

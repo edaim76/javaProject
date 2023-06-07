@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-//import java.nio.charset.Charset;
 import java.util.Scanner; 
 
 import org.json.JSONObject;
@@ -19,38 +18,21 @@ public class NormalAccountFix {
 	private BufferedWriter bw;
 	private String rootPath = "C://Temp/AllEmployees.json";
 	
-//	public NormalAccountFix() throws IOException {
-//	
-//		// 기본 생성자에서는 employee 와 employeeData 초기화 불가
-//		// NoemalAccountFix() 메소드 호출 시 최소한 객체 데이터를 넘겨 받아야 한다
-//	
-//		BufferedReader br = new BufferedReader(new FileReader(rootPath));
-//		root = new JSONObject(br.readLine());
-//		employee = new Employee();
-//		employeeData = root.getJSONObject(employee.getId());
-//		br.close();
-//		bw = new BufferedWriter(new FileWriter(rootPath));
-//	}
-	public NormalAccountFix(Employee employee) throws IOException {
+	public NormalAccountFix(Employee employee) {
 		this.employee = employee;
-		BufferedReader br = new BufferedReader(new FileReader(rootPath));
-		root = new JSONObject(br.readLine());
-		employeeData = root.getJSONObject(this.employee.getId());
-		br.close();
-		bw = new BufferedWriter(new FileWriter(rootPath));
-	}
-	public NormalAccountFix(Employee employee, JSONObject employeeData) throws IOException {
-		this.employee = employee;
-		BufferedReader br = new BufferedReader(new FileReader(rootPath));
-		root = new JSONObject(br.readLine());
-		br.close();
-		bw = new BufferedWriter(new FileWriter(rootPath));
-	}
-	public NormalAccountFix(Employee employee, JSONObject root, JSONObject employeeData) throws IOException {
-		this.employee = employee;
-		this.root = root;
-		this.employeeData = employeeData;
-		bw = new BufferedWriter(new FileWriter(rootPath));
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(rootPath));
+			root = new JSONObject(br.readLine());
+			employeeData = root.getJSONObject(this.employee.getId());
+			br.close();
+			bw = new BufferedWriter(new FileWriter(rootPath));
+		} catch(IOException e) {e.printStackTrace();}
+		finally {
+			try{
+				br.close();
+			} catch(IOException e) {e.printStackTrace();}
+		}
 	}
 	
 	// 메소드
@@ -77,22 +59,26 @@ public class NormalAccountFix {
 				case "2" :{
 					System.out.print("\n바꿀 생년월일을 입력하세요 > ");
 					String changeBirthDate = sc.nextLine();
-					setName(changeBirthDate);
+					setBirthDate(changeBirthDate);
 					break;
 				}
 				case "3" :{
 					System.out.print("\n바꿀 전화번호를 입력하세요 > ");
 					String changePhoneNumber = sc.nextLine();
-					setName(changePhoneNumber);
+					setPhoneNumber(changePhoneNumber);
 					break;
 				}
 				case "4" :{
 					System.out.print("\n바꿀 비밀번호를 입력하세요 > ");
 					String changePassword = sc.nextLine();
-					setName(changePassword);
+					setPassword(changePassword);
 					break;
 				}
-				case "9" : return;
+				case "9" : {
+					try {
+						bw.close(); return;
+					} catch(IOException e) {}
+				}
 			}
 		
 		}
@@ -123,7 +109,10 @@ public class NormalAccountFix {
 	
 	// AllEmployees.json 업데이트
 	public void writeData() {
-		try{bw.write(root.toString());}
+		try{
+//			root.put(employee.getId(), employeeData); // *유사시 주석 해제
+			bw.write(root.toString());
+		}
 		catch(IOException e) { e.printStackTrace(); }
 		finally { try {
 					bw.flush(); bw.close();
